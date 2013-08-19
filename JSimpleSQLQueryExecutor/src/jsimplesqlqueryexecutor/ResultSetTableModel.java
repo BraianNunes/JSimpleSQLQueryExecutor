@@ -31,7 +31,6 @@ public class ResultSetTableModel extends AbstractTableModel {
             rs.last();
             count = rs.getRow();
             rs.beforeFirst();
-
         } catch (SQLException ex) {
             Logger.getLogger(ResultSetTableModel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,12 +74,10 @@ public class ResultSetTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         try {
             return Class.forName(this.rs.getMetaData().getColumnClassName(columnIndex + 1));
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ResultSetTableModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ResultSetTableModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return super.getColumnClass(columnIndex); //To change body of generated methods, choose Tools | Templates.
+        return Object.class;
     }
     
 }
